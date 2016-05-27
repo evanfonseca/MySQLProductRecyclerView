@@ -38,7 +38,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
         activity = (Activity) ctx;
     }
 
-    String json_string = "http://192.168.0.103/Products/get_product_details.php";
+    String json_string = "http://172.16.40.247/Products/get_product_details.php";
 
     @Override
     protected void onPreExecute() {
