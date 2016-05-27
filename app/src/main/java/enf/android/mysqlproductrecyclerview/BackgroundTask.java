@@ -1,11 +1,15 @@
 package enf.android.mysqlproductrecyclerview;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,6 +35,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<Product> arrayList = new ArrayList<>();
+    ProgressDialog progressDialog;
 
 
     public BackgroundTask(Context ctx) {
@@ -48,6 +53,18 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
         recyclerView.setHasFixedSize(true);
         adapter = new RecyclerAdapter(arrayList);
         recyclerView.setAdapter(adapter);
+        progressDialog = new ProgressDialog(ctx);
+        progressDialog.setTitle("Please Wait...");
+        progressDialog.setTitle("List is Loading...");
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+
+
+
+
+
     }
 
     @Override
@@ -89,6 +106,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
 
                 Product product = new Product(JO.getInt("productId"),JO.getString("name"),JO.getInt("quantity"),JO.getString("description"),JO.getDouble("price"));
                 publishProgress(product);
+                Thread.sleep(1000);
             }
 
             Log.d("JSON_STRING", json_string);
@@ -100,9 +118,28 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
 
         return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        progressDialog.dismiss();
+
+        recyclerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent intent = new Intent(ctx.getApplicationContext(), Show_Product_Details.class);
+                //intent.putExtra("ID", ID);
+
+               // ctx.getApplicationContext().startActivity(intent);
+                Toast.makeText(ctx.getApplicationContext(),"AKI",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }
