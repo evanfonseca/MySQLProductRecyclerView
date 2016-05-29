@@ -26,6 +26,6 @@ public class Show_Product_Details extends AppCompatActivity {
         tv.setText(product.toString());
 
         TextView tv2= (TextView) findViewById(R.id.textView2);
-        tv2.setText(imageIDs.toString());
+        tv2.setText("ImageIDS: "+imageIDs.toString());
     }
 }
