@@ -21,7 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".DisplayList" />
-        <activity android:name=".Show_Product_Details"></activity>
+        <activity android:name=".Show_Product_Details" />
+        <activity android:name=".Add_Product"></activity>
     </application>
 
 </manifest>

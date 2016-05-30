@@ -1,9 +1,11 @@
 package enf.android.mysqlproductrecyclerview;
 
+import java.io.Serializable;
+
 /**
  * Created by enfonseca on 5/20/16.
  */
-public class Product {
+public class Product implements Serializable {
 
     private int id;
     private String name;
@@ -59,7 +61,16 @@ public class Product {
         this.price = price;
     }
 
-
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                '}';
+    }
 
     public Product() {
     }

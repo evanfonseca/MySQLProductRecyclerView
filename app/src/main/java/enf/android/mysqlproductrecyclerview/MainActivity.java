@@ -31,5 +31,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void btnAddProductOnClick (View v){
+
+        startActivity(new Intent(MainActivity.this,Add_Product.class));
+    }
+
 
 }

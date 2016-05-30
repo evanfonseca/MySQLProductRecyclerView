@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 /**
  * Created by enfonseca on 5/20/16.
  */
-public class BackgroundTask extends AsyncTask<Void,Product,Void>{
+public class BackgroundTask extends AsyncTask<Void,Product,Void> implements RecyclerAdapter.OnItemClick {
 
     Context ctx;
     Activity activity;
@@ -36,6 +39,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
     RecyclerView.LayoutManager layoutManager;
     ArrayList<Product> arrayList = new ArrayList<>();
     ProgressDialog progressDialog;
+    ArrayList<ArrayList<Integer>> ArrayImageIDsArray=new ArrayList<>();
 
 
     public BackgroundTask(Context ctx) {
@@ -51,7 +55,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
         layoutManager = new LinearLayoutManager(ctx);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new RecyclerAdapter(arrayList);
+        adapter = new RecyclerAdapter(arrayList,ctx,this);
         recyclerView.setAdapter(adapter);
         progressDialog = new ProgressDialog(ctx);
         progressDialog.setTitle("Please Wait...");
@@ -59,10 +63,6 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(false);
         progressDialog.show();
-
-
-
-
 
 
     }
@@ -104,9 +104,22 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
                 JSONObject JO = jsonArray.getJSONObject(count);
                 count++;
 
+
+
                 Product product = new Product(JO.getInt("productId"),JO.getString("name"),JO.getInt("quantity"),JO.getString("description"),JO.getDouble("price"));
+
+                JSONArray jsonArrayimIDs = JO.getJSONArray("images");
+
+                ArrayList<Integer> arrayListActual=new ArrayList<>();
+                int countJ=0;
+                while (countJ<jsonArrayimIDs.length()){
+                    JSONObject joIMID = jsonArrayimIDs.getJSONObject(countJ);
+                    arrayListActual.add(joIMID.getInt("idImagem"));
+                    countJ++;
+                }
+                ArrayImageIDsArray.add(arrayListActual);
                 publishProgress(product);
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
 
             Log.d("JSON_STRING", json_string);
@@ -131,15 +144,31 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void>{
     protected void onPostExecute(Void aVoid) {
         progressDialog.dismiss();
 
-        recyclerView.setOnClickListener(new View.OnClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
             @Override
-            public void onClick(View view) {
-                //Intent intent = new Intent(ctx.getApplicationContext(), Show_Product_Details.class);
-                //intent.putExtra("ID", ID);
+            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
+                return false;
+            }
 
-               // ctx.getApplicationContext().startActivity(intent);
-                Toast.makeText(ctx.getApplicationContext(),"AKI",Toast.LENGTH_LONG).show();
+            @Override
+            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
+            }
+
+            @Override
+            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+
             }
         });
+    }
+
+    @Override
+    public void onClickItem(View caller, int position) {
+        Toast.makeText(ctx,"position: "+position,Toast.LENGTH_LONG).show();
+        Product product=arrayList.get(position-1);
+         Intent intent = new Intent(ctx,Show_Product_Details.class);
+        intent.putExtra("Product", (Serializable) product);
+        intent.putExtra("ListImageID",ArrayImageIDsArray.get(position-1));
+        ctx.startActivity(intent);
+
     }
 }
