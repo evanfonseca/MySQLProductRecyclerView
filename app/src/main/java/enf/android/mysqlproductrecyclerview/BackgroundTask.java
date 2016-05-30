@@ -47,7 +47,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
         activity = (Activity) ctx;
     }
 
-    String json_string = "http://192.168.0.102/Products/get_product_details.php";
+    String json_string = "http://172.16.40.247/Products/get_product_details.php";
 
     @Override
     protected void onPreExecute() {
@@ -119,7 +119,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
                 }
                 ArrayImageIDsArray.add(arrayListActual);
                 publishProgress(product);
-                Thread.sleep(1000);
+                Thread.sleep(100);
             }
 
             Log.d("JSON_STRING", json_string);
