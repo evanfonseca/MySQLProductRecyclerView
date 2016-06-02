@@ -3,6 +3,9 @@ package enf.android.mysqlproductrecyclerview;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,11 +24,35 @@ public class Show_Product_Details extends AppCompatActivity {
 
         imageLinks=i.getStringArrayListExtra("ListImageLink");
 
-        TextView tv = (TextView) findViewById(R.id.textView);
 
-        tv.setText(product.toString());
+        TextView nome = (TextView) findViewById(R.id.nome);
+        nome.setText(product.getName());
 
+        TextView preco = (TextView) findViewById(R.id.preco);
+        preco.setText("Preço: "+product.getPrice());
+
+        TextView desc = (TextView) findViewById(R.id.desc);
+        desc.setText("Descrição: "+product.getDescription());
+
+        TextView quantidade = (TextView) findViewById(R.id.quantidade);
+        quantidade.setText("Quantidade disponível: "+product.getQuantity());
+
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this,imageLinks));
+
+        final ArrayList<String> finalImageLinks = imageLinks;
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), FullImageActivity.class);
+                i.putExtra("id", position);
+                i.putStringArrayListExtra("Links", finalImageLinks);
+                startActivity(i);
+            }
+        });
+
+        /*
         TextView tv2= (TextView) findViewById(R.id.textView2);
         tv2.setText("ImageLinks: "+imageLinks.toString());
+        */
     }
 }

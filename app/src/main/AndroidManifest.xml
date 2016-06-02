@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +24,9 @@
         </activity>
         <activity android:name=".DisplayList" />
         <activity android:name=".Show_Product_Details" />
-        <activity android:name=".Add_Product"></activity>
+        <activity android:name=".Add_Product" />
+        <activity android:name=".MyGridView"></activity>
+        <activity android:name=".FullImageActivity"></activity>
     </application>
 
 </manifest>

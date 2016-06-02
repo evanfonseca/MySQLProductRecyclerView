@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -24,10 +27,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
 
     ArrayList<Product> listProducts = new ArrayList<>();
 
-    public RecyclerAdapter(ArrayList<Product> arrayList, Context context,OnItemClick listener){
+    ArrayList<ArrayList<String>> LinksArrays=new ArrayList<>();
+
+    public RecyclerAdapter(ArrayList<Product> arrayList, Context context,OnItemClick listener, ArrayList<ArrayList<String>> listArrayLinks){
         this.listProducts=arrayList;
         this.ctx=context;
         this.mListener=listener;
+        this.LinksArrays=listArrayLinks;
 
     }
 
@@ -59,10 +65,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
 
         if(holder.viewType==TYPE_LIST)
         {
+
+            ArrayList<String> listLink = new ArrayList<>();
+            listLink = this.LinksArrays.get(position-1);
+
             Product product = listProducts.get(position - 1);
-            holder.Id.setText(Integer.toString(product.getId()));
+            //holder.Id.setText(Integer.toString(product.getId()));
             holder.Name.setText(product.getName());
             holder.Price.setText(String.valueOf(product.getPrice()));
+
+            if (listLink.size()> 0){
+
+                String ultimaImagem = listLink.get(listLink.size() - 1);
+                String url = "http://172.16.40.247/Products/images/"+ultimaImagem+".jpg";;
+                Picasso.with(ctx)
+                        .load(url)
+                        .placeholder(R.drawable.loader)
+                        .fit()
+                        .centerCrop().into(holder.imageViewList);
+            }
+            else {
+                holder.imageViewList.setImageResource(R.drawable.withoutimage);
+            }
 
         }
 
@@ -93,6 +117,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
         int viewType;
         Context c;
         private OnItemClick mListener;
+        ImageView imageViewList;
 
         public RecyclerViewHolder(View view, int viewType,Context ctxx,OnItemClick listener){
 
@@ -103,7 +128,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
             if (viewType== TYPE_LIST)
             {
 
-                Id= (TextView) view.findViewById(R.id.p_id);
+                //Id= (TextView) view.findViewById(R.id.p_id);
+                imageViewList= (ImageView) view.findViewById(R.id.imageViewInList);
                 Name= (TextView) view.findViewById(R.id.p_name);
                 Price= (TextView) view.findViewById(R.id.p_price);
                 this.viewType=TYPE_LIST;

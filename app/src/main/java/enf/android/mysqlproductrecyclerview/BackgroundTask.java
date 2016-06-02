@@ -47,7 +47,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
         activity = (Activity) ctx;
     }
 
-    String json_string = "http://192.168.0.102/Products/get_product_details.php";
+    String json_string = "http://172.16.40.247/Products/get_product_details.php";
 
     @Override
     protected void onPreExecute() {
@@ -55,7 +55,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
         layoutManager = new LinearLayoutManager(ctx);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new RecyclerAdapter(arrayList,ctx,this);
+        adapter = new RecyclerAdapter(arrayList,ctx,this,LinksArrays);
         recyclerView.setAdapter(adapter);
         progressDialog = new ProgressDialog(ctx);
         progressDialog.setTitle("Please Wait...");
