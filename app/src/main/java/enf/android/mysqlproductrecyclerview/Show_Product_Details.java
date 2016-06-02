@@ -17,15 +17,15 @@ public class Show_Product_Details extends AppCompatActivity {
         Intent i = getIntent();
         Product product = (Product) i.getSerializableExtra("Product");
 
-        ArrayList<Integer> imageIDs = new ArrayList<>();
+        ArrayList<String> imageLinks = new ArrayList<>();
 
-        imageIDs=i.getIntegerArrayListExtra("ListImageID");
+        imageLinks=i.getStringArrayListExtra("ListImageLink");
 
         TextView tv = (TextView) findViewById(R.id.textView);
 
         tv.setText(product.toString());
 
         TextView tv2= (TextView) findViewById(R.id.textView2);
-        tv2.setText("ImageIDS: "+imageIDs.toString());
+        tv2.setText("ImageLinks: "+imageLinks.toString());
     }
 }

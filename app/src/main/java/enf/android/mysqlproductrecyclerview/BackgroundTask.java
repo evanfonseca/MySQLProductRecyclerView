@@ -39,7 +39,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
     RecyclerView.LayoutManager layoutManager;
     ArrayList<Product> arrayList = new ArrayList<>();
     ProgressDialog progressDialog;
-    ArrayList<ArrayList<Integer>> ArrayImageIDsArray=new ArrayList<>();
+    ArrayList<ArrayList<String>> LinksArrays=new ArrayList<>();
 
 
     public BackgroundTask(Context ctx) {
@@ -47,7 +47,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
         activity = (Activity) ctx;
     }
 
-    String json_string = "http://172.16.40.247/Products/get_product_details.php";
+    String json_string = "http://192.168.0.102/Products/get_product_details.php";
 
     @Override
     protected void onPreExecute() {
@@ -108,16 +108,16 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
 
                 Product product = new Product(JO.getInt("productId"),JO.getString("name"),JO.getInt("quantity"),JO.getString("description"),JO.getDouble("price"));
 
-                JSONArray jsonArrayimIDs = JO.getJSONArray("images");
+                JSONArray jsonArrayimLinks = JO.getJSONArray("images");
 
-                ArrayList<Integer> arrayListActual=new ArrayList<>();
+                ArrayList<String> arrayListActual=new ArrayList<>();
                 int countJ=0;
-                while (countJ<jsonArrayimIDs.length()){
-                    JSONObject joIMID = jsonArrayimIDs.getJSONObject(countJ);
-                    arrayListActual.add(joIMID.getInt("idImagem"));
+                while (countJ<jsonArrayimLinks.length()){
+                    JSONObject joLinks = jsonArrayimLinks.getJSONObject(countJ);
+                    arrayListActual.add(joLinks.getString("link"));
                     countJ++;
                 }
-                ArrayImageIDsArray.add(arrayListActual);
+                LinksArrays.add(arrayListActual);
                 publishProgress(product);
                 Thread.sleep(100);
             }
@@ -167,7 +167,7 @@ public class BackgroundTask extends AsyncTask<Void,Product,Void> implements Recy
         Product product=arrayList.get(position-1);
          Intent intent = new Intent(ctx,Show_Product_Details.class);
         intent.putExtra("Product", (Serializable) product);
-        intent.putExtra("ListImageID",ArrayImageIDsArray.get(position-1));
+        intent.putExtra("ListImageLink",LinksArrays.get(position-1));
         ctx.startActivity(intent);
 
     }
