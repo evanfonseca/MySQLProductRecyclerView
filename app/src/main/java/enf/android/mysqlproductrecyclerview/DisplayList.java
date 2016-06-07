@@ -7,17 +7,21 @@ import android.widget.Toast;
 
 public class DisplayList extends AppCompatActivity  implements RecyclerAdapter.OnItemClick {
 
+    private String prefixoURL;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_list);
 
+        Bundle bundle = getIntent().getExtras();
+        prefixoURL=bundle.getString("prefixoURL");
 
+        Toast.makeText(this,"DIsplaList Activity URL:"+prefixoURL,Toast.LENGTH_LONG).show();
 
-        BackgroundTask backgroundTask = new BackgroundTask(DisplayList.this);
+        BackgroundTask backgroundTask = new BackgroundTask(DisplayList.this,this.prefixoURL);
 
-        //continuar apartir do minuto 48
         backgroundTask.execute();
 
 
@@ -26,7 +30,7 @@ public class DisplayList extends AppCompatActivity  implements RecyclerAdapter.O
     @Override
     public void onClickItem(View caller, int position) {
 
-        Toast.makeText(this,"AKiiiiiiiiiI",Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,"AKiiiiiiiiiI",Toast.LENGTH_LONG).show();
 
     }
 }

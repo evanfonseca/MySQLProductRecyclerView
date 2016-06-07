@@ -5,29 +5,16 @@
     android:background="?attr/colorPrimary"
     >
 
-
     <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:text="Id"
-        android:id="@+id/h_id"
+        android:text="Product"
+        android:id="@+id/h_name"
         android:gravity="center_vertical"
         android:textSize="25dp"
         android:textStyle="bold"
         android:textColor="#ffffff"
-        android:layout_marginLeft="15dp"/>
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="match_parent"
-        android:text="Product"
-        android:id="@+id/h_name"
-
-        android:gravity="center_vertical"
-        android:textSize="25dp"
-        android:textStyle="bold"
-        android:textColor="#ffffff"/>
+        android:layout_marginLeft="5dp"/>
 
     <TextView
         android:layout_width="70dp"
