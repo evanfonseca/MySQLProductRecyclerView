@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context="enf.android.mysqlproductrecyclerview.Add_Product">
+
+
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nome"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Nome" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/preco"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Preço"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/quantidade"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:hint="Quantidade"
+        android:inputType="numberSigned" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/desc"
+        android:hint="Escreva uma descrição para o produto."
+        android:layout_weight="0.51"
+         />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/imageView"
+        android:src="@mipmap/ic_launcher" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/deepPurple4"
+        android:textColor="@color/white"
+        android:id="@+id/btnInsertImage"
+        android:text="Carregar Imagem"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnInsertImageClick" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/deepPurple4"
+        android:textColor="@color/white"
+        android:id="@+id/inserirProduto"
+        android:onClick="insertProduct"
+        android:text="Inserir"
+        android:layout_marginBottom="10dp"/>
+
+</LinearLayout>
+
+</ScrollView>
