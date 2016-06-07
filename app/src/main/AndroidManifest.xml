@@ -3,6 +3,7 @@
     package="enf.android.mysqlproductrecyclerview">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
 
@@ -25,7 +26,6 @@
         <activity android:name=".DisplayList" />
         <activity android:name=".Show_Product_Details" />
         <activity android:name=".Add_Product" />
-        <activity android:name=".MyGridView"></activity>
         <activity android:name=".FullImageActivity"></activity>
     </application>
 

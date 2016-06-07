@@ -14,6 +14,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button BtnlistProduct;
+    String prefixoURL = "http://172.16.40.247";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,10 @@ public class MainActivity extends AppCompatActivity {
         BtnlistProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,DisplayList.class));
+
+                Intent intent= new Intent(MainActivity.this,DisplayList.class);
+                intent.putExtra("prefixoURL",prefixoURL);
+                startActivity(intent);
             }
         });
 
@@ -33,8 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void btnAddProductOnClick (View v){
 
-        startActivity(new Intent(MainActivity.this,Add_Product.class));
+        Intent intent= new Intent(MainActivity.this,Add_Product.class);
+        intent.putExtra("prefixoURL",prefixoURL);
+        startActivity(intent);
     }
-
 
 }

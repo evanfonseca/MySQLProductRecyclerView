@@ -25,6 +25,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
     private Context ctx;
     private OnItemClick mListener;
 
+
     ArrayList<Product> listProducts = new ArrayList<>();
 
     ArrayList<ArrayList<String>> LinksArrays=new ArrayList<>();
@@ -77,7 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter <RecyclerAdapter.Recyc
             if (listLink.size()> 0){
 
                 String ultimaImagem = listLink.get(listLink.size() - 1);
-                String url = "http://172.16.40.247/Products/images/"+ultimaImagem+".jpg";;
+                String url = ultimaImagem;
                 Picasso.with(ctx)
                         .load(url)
                         .placeholder(R.drawable.loader)

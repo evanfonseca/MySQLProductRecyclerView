@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Show_Product_Details extends AppCompatActivity {
 
+    private  int id_produto;
+    private String prefixoURL = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +22,12 @@ public class Show_Product_Details extends AppCompatActivity {
 
         Intent i = getIntent();
         Product product = (Product) i.getSerializableExtra("Product");
+        id_produto=product.getId();
+
+        Bundle bundle = getIntent().getExtras();
+        prefixoURL=bundle.getString("prefixoURL");
+
+
 
         ArrayList<String> imageLinks = new ArrayList<>();
 
@@ -54,5 +63,26 @@ public class Show_Product_Details extends AppCompatActivity {
         TextView tv2= (TextView) findViewById(R.id.textView2);
         tv2.setText("ImageLinks: "+imageLinks.toString());
         */
+
+
+
+
     }
+
+    public void btnRemoveProductOnClick(View v){
+        String method= "remove";
+
+        //Toast.makeText(this,"Aki",Toast.LENGTH_LONG).show();
+
+
+        CRUDBackgroundTask cbTask = new CRUDBackgroundTask(this,this.prefixoURL);
+        cbTask.execute(method,""+id_produto);
+
+        Intent intent= new Intent(Show_Product_Details.this,DisplayList.class);
+        intent.putExtra("prefixoURL", prefixoURL);
+        startActivity(intent);
+
+    }
+
+
 }

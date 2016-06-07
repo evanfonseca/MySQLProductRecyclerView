@@ -31,7 +31,7 @@ public class ImageAdapter extends BaseAdapter {
         mThumbIds = new String[imageTotal];
         int i=0;
         for (String link: this.Links ) {
-            mThumbIds[i]="http://172.16.40.247/Products/images/"+link+".jpg";
+            mThumbIds[i]=link;
             i++;
         }
     }

@@ -5,9 +5,6 @@
     android:background="?attr/colorPrimary"
     >
 
-
-
-
     <TextView
         android:layout_width="240dp"
         android:layout_height="match_parent"
