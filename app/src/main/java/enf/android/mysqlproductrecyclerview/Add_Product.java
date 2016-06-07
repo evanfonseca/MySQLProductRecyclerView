@@ -234,7 +234,7 @@ public class Add_Product extends AppCompatActivity {
 
                 }
 
-                Toast.makeText(this,"path_file: "+image.getPath(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(this,"path_file: "+image.getPath(),Toast.LENGTH_LONG).show();
         }
 
 
