@@ -173,8 +173,23 @@ public class CRUDBackgroundTask extends AsyncTask<String,Void,String>{
 
         }
 
+        if (method.equals("update"))
+        {
 
-        return null;
+            String update_url = prefixoURL+"/Products/update_product.php";
+
+            String name=params[1];
+            String quantity=params[2];
+            String description=params[3];
+            String price=params[4];
+            String id_Prod=params[5];
+
+            String result = name+" "+quantity+" "+description+" "+price+" id: "+id_Prod;
+
+            return result;
+        }
+
+            return null;
     }
 
     @Override

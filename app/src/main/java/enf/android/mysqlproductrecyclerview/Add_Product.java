@@ -353,7 +353,7 @@ public class Add_Product extends AppCompatActivity {
                     imageChoosenUri.toString());
         }
 
-        //mBitmap
+       //mBitmap
         if (mBitmap != null) {
             outState.putParcelable("mBitmap", mBitmap);;
         }
