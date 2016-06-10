@@ -54,7 +54,7 @@ public class UpdateProduct extends AppCompatActivity {
 
         //Toast.makeText(this,"Update id:",Toast.LENGTH_LONG).show();
 
-       CRUDBackgroundTask cbTask = new CRUDBackgroundTask(this,this.prefixoURL);
+        CRUDBackgroundTask cbTask = new CRUDBackgroundTask(this,this.prefixoURL);
         cbTask.execute(method, name, quantity, description, price, st_id_Prod);
 
         finish();
