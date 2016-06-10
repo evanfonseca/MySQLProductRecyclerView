@@ -148,7 +148,7 @@ public class CRUDBackgroundTask extends AsyncTask<String,Void,String>{
                 BufferedReader br = new BufferedReader(new InputStreamReader(IS));
                 String line = "";
                 StringBuilder responseOutput = new StringBuilder();
-                //System.out.println("output===============" + br);
+
 
                 while((line = br.readLine()) != null ) {
                     responseOutput.append(line);

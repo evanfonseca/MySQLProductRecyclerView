@@ -107,6 +107,7 @@ public class Add_Product extends AppCompatActivity {
                 android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
 
+
     }
 
 
@@ -152,7 +153,8 @@ public class Add_Product extends AppCompatActivity {
         });
         dialog.findViewById(R.id.btnChoosePath)
                 .setOnClickListener(new View.OnClickListener() {
-                    @Override public void onClick(View v) {
+                    @Override
+                    public void onClick(View v) {
                         activeGallery();
                     }
                 });
@@ -238,13 +240,19 @@ public class Add_Product extends AppCompatActivity {
         }
 
 
-        try {
-            mBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageChoosenUri);
-            my_img_view.setImageBitmap(mBitmap);
+        if(imageChoosenUri!=null)
+        {
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                mBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageChoosenUri);
+                my_img_view.setImageBitmap(mBitmap);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+
+
     }
 
 
@@ -275,9 +283,13 @@ public class Add_Product extends AppCompatActivity {
         finish();
 
 
-        //CHAMAR UPLOAD DE IMAGEN OU CICLO EM CASO DE LISTA DE IMAGENS (LEVANDO SEMPRE ID DO PRODUTO)
-        uploadImage(product_ID_Inserted);
 
+
+        if(imageChoosenUri!=null)
+        {
+            //CHAMAR UPLOAD DE IMAGEN OU CICLO EM CASO DE LISTA DE IMAGENS (LEVANDO SEMPRE ID DO PRODUTO)
+            uploadImage(product_ID_Inserted);
+        }
 
 
 

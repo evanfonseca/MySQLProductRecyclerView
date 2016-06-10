@@ -57,7 +57,9 @@ public class UpdateProduct extends AppCompatActivity {
         CRUDBackgroundTask cbTask = new CRUDBackgroundTask(this,this.prefixoURL);
         cbTask.execute(method, name, quantity, description, price, st_id_Prod);
 
-        finish();
+        Intent intent= new Intent(UpdateProduct.this,DisplayList.class);
+        intent.putExtra("prefixoURL", prefixoURL);
+        startActivity(intent);
 
 
         //CHAMAR UPLOAD DE IMAGEN OU CICLO EM CASO DE LISTA DE IMAGENS (LEVANDO SEMPRE ID DO PRODUTO)
