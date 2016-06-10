@@ -49,6 +49,16 @@
             android:text="Remover Produto"
             android:layout_marginBottom="10dp"/>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/deepPurple4"
+            android:textColor="@color/white"
+            android:id="@+id/btnUpdate"
+            android:onClick="btnUpdateProductOnClick"
+            android:text="Actualizar Produto"
+            android:layout_marginBottom="10dp"/>
+
         <GridView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/gridview"
             android:layout_width="fill_parent"

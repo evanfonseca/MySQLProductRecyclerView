@@ -173,8 +173,83 @@ public class CRUDBackgroundTask extends AsyncTask<String,Void,String>{
 
         }
 
+        if (method.equals("update"))
+        {
 
-        return null;
+            String update_url = prefixoURL+"/Products/update_product.php";
+
+            String name=params[1];
+            String quantity=params[2];
+            String description=params[3];
+            String price=params[4];
+            String id_Prod=params[5];
+
+            //String result = name+" "+quantity+" "+description+" "+price+" id: "+id_Prod;
+
+            URL url = null;
+            try {
+                url = new URL(update_url);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                httpURLConnection.setUseCaches(false);
+                httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
+                httpURLConnection.setRequestProperty("Connection", "Keep-Alive");
+                httpURLConnection.setRequestProperty("ENCTYPE", "multipart/form-data");
+
+                OutputStream OS ;
+                OS =httpURLConnection.getOutputStream();
+
+
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(OS,"UTF-8"));
+                String data = URLEncoder.encode("name","UTF-8") + "="+URLEncoder.encode(name,"UTF-8")+"&"+
+                        URLEncoder.encode("quantity","UTF-8") + "="+URLEncoder.encode(quantity,"UTF-8")+"&"+
+                        URLEncoder.encode("description","UTF-8") + "="+URLEncoder.encode(description,"UTF-8")+"&"+
+                        URLEncoder.encode("price","UTF-8") + "="+URLEncoder.encode(price,"UTF-8")+"&"+
+                        URLEncoder.encode("id_Product","UTF-8") + "="+URLEncoder.encode(id_Prod,"UTF-8");
+                bufferedWriter.write(data);
+
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                OS.close();
+                InputStream IS = httpURLConnection.getInputStream();
+
+                final StringBuilder output = new StringBuilder("Request URL " + url);
+                BufferedReader br = new BufferedReader(new InputStreamReader(IS));
+                String line = "";
+                StringBuilder responseOutput = new StringBuilder();
+                //System.out.println("output===============" + br);
+
+                while((line = br.readLine()) != null ) {
+                    responseOutput.append(line);
+                }
+                br.close();
+
+                String result =responseOutput.toString();
+                //System.out.println("responseOutput===============================================================" + responseOutput);
+
+
+                IS.close();
+
+
+                return result;
+
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (ProtocolException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+            return null;
     }
 
     @Override

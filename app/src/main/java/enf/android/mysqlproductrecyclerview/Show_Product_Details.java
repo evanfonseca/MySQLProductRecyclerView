@@ -9,19 +9,21 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Show_Product_Details extends AppCompatActivity {
 
     private  int id_produto;
     private String prefixoURL = "";
+    Product product;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show__product__details);
 
         Intent i = getIntent();
-        Product product = (Product) i.getSerializableExtra("Product");
+        product = (Product) i.getSerializableExtra("Product");
         id_produto=product.getId();
 
         Bundle bundle = getIntent().getExtras();
@@ -79,6 +81,21 @@ public class Show_Product_Details extends AppCompatActivity {
         cbTask.execute(method,""+id_produto);
 
         Intent intent= new Intent(Show_Product_Details.this,DisplayList.class);
+        intent.putExtra("prefixoURL", prefixoURL);
+        startActivity(intent);
+
+    }
+
+    public void btnUpdateProductOnClick(View v){
+        String method= "update";
+
+        //Toast.makeText(this,"Aki",Toast.LENGTH_LONG).show();
+
+
+
+
+        Intent intent= new Intent(Show_Product_Details.this,UpdateProduct.class);
+        intent.putExtra("Product", (Serializable) product);
         intent.putExtra("prefixoURL", prefixoURL);
         startActivity(intent);
 
